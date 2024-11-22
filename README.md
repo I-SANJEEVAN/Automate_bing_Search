@@ -1,4 +1,4 @@
-#Bing Chrome Search Automation
+#BingChromeSearchAutomation
 This Python project uses Selenium WebDriver to automate Bing searches with random search terms. The project is designed to run Chrome in a specified user profile and perform 45 automated searches on Bing, simulating user interaction.
 
 Features
