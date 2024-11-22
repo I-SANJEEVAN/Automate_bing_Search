@@ -1,0 +1,54 @@
+import time
+import random
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+import os
+
+# List of random search terms
+search_terms = ["python programming", "AI technology", "web development", "cloud computing", 
+                "data science", "machine learning", "artificial intelligence", "JavaScript", 
+                "database management", "software engineering", "AWS tutorial", "data structures",
+                "deep learning", "cloud security", "front-end development", "back-end development", 
+                "Python libraries", "IoT", "cybersecurity", "blockchain technology", "ReactJS", 
+                "AngularJS", "Node.js", "Linux commands", "SQL queries", "Java programming",
+                "C++ tutorial", "GitHub", "project management", "agile methodologies", 
+                "DevOps tools", "virtualization", "Docker", "Kubernetes", "data analytics", 
+                "big data", "cloud computing services", "web scraping", "automation", 
+                "ethical hacking", "UI/UX design", "Git commands", "cloud storage", "cloud computing"]
+
+# Set up Chrome options to use a specific user profile
+options = webdriver.ChromeOptions()
+
+# Path to your Chrome user profile (adjust for your system)
+profile_path = r"C:\Users\sanje\AppData\Local\Google\Chrome\User Data"  # Ensure this path is correct
+
+# Ensure no Chrome processes are running
+devtools_file = os.path.join(profile_path, 'DevToolsActivePort')
+if os.path.exists(devtools_file):
+    os.remove(devtools_file)
+
+options.add_argument(f"user-data-dir={profile_path}")  # Use this user profile
+options.add_argument("profile-directory=Default")  # Use the "Default" profile
+
+# Initialize the WebDriver
+driver = webdriver.Chrome(options=options)
+
+# Open Bing search
+driver.get("https://www.bing.com")
+
+# Perform 45 random searches
+for _ in range(45):
+    search_term = random.choice(search_terms)  # Choose a random search term
+    search_box = driver.find_element("name", "q")  # Locate the search box
+    search_box.clear()  # Clear any previous input
+    search_box.send_keys(search_term)  # Type the random search term
+    search_box.send_keys(Keys.RETURN)  # Press Enter to submit the search
+    
+    time.sleep(random.randint(2, 5))  # Wait for 2-5 seconds before the next search
+
+# Add a message to wait for manual closure
+print("Searches completed. Press Enter to close the browser.")
+input()  # Wait for user input to close the browser
+
+# Keep the browser open until the user presses Enter
+driver.quit()
