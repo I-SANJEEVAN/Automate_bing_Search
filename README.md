@@ -23,3 +23,6 @@ This Python project uses **Selenium WebDriver** to automate Bing searches with r
   Install via pip:
   ```bash
   pip install selenium
+
+## **To Run PyFile**
+python bing_chrome_search.py
